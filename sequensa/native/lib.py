@@ -2,8 +2,8 @@
 from ctypes import *
 libsq = cdll.LoadLibrary('/home/magistermaks/sequensa/libseqapi.so')
 
-SQNATIVE = CFUNCTYPE(c_void_p, c_void_p)
-SQERRHANDLE = CFUNCTYPE(c_bool, c_void_p)
+libsq.SQNATIVE = CFUNCTYPE(c_void_p, c_void_p)
+libsq.SQERRHANDLE = CFUNCTYPE(c_bool, c_void_p)
 
 # Dummy function, it can be used to verify if the API is correctly loaded
 libsq.seq_verify.__doc__ = "Dummy function, it can be used to verify if the API is correctly loaded"
