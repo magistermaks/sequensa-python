@@ -12,4 +12,4 @@ class Program:
         native.seq_compiler_build_free(self.__pointer)
 
     def execute(self, executor):
-        native.seq_executor_execute(executor.ptr(), self.__pointer, self.__size)
+        native.seq_executor_execute(executor.ptr(), self.__pointer, self.__size, executor.err())

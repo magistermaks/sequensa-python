@@ -1,11 +1,15 @@
-
 from .native import libsq as native
 from .stream import Stream
+
+
+def default_error_handle(ptr):
+    return False
 
 
 class Executor:
 
     def __init__(self):
+        self.__error = native.SQERRHANDLE(default_error_handle)
         self.__pointer = native.seq_executor_new()
 
     def __del__(self):
@@ -13,6 +17,12 @@ class Executor:
 
     def ptr(self):
         return self.__pointer
+
+    def err(self):
+        return self.__error
+
+    def set_error_handle(self, handle):
+        self.__error = handle
 
     def execute(self, program):
         program.execute(self)

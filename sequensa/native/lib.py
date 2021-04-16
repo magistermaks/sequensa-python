@@ -5,8 +5,8 @@ libsq = cdll.LoadLibrary('/home/magistermaks/sequensa/libseqapi.so')
 libsq.SQNATIVE = CFUNCTYPE(c_void_p, c_void_p)
 libsq.SQERRHANDLE = CFUNCTYPE(c_bool, c_void_p)
 
-# Dummy function, it can be used to verify if the API is correctly loaded
-libsq.seq_verify.__doc__ = "Dummy function, it can be used to verify if the API is correctly loaded"
+# Dummy function
+libsq.seq_verify.__doc__ = "Dummy function"
 libsq.seq_verify.restype = c_int 
 libsq.seq_verify.argtypes = []
 seq_verify = libsq.seq_verify
@@ -113,10 +113,16 @@ libsq.seq_executor_new.restype = c_void_p
 libsq.seq_executor_new.argtypes = []
 seq_executor_new = libsq.seq_executor_new
 
+# Set Executor's strict math flag
+libsq.seq_executor_strict_math.__doc__ = "Set Executor's strict math flag"
+libsq.seq_executor_strict_math.restype = None
+libsq.seq_executor_strict_math.argtypes = [c_void_p, c_bool]
+seq_executor_strict_math = libsq.seq_executor_strict_math
+
 # Execute given program
 libsq.seq_executor_execute.__doc__ = "Execute given program"
 libsq.seq_executor_execute.restype = None
-libsq.seq_executor_execute.argtypes = [c_void_p, c_void_p, c_int]
+libsq.seq_executor_execute.argtypes = [c_void_p, c_void_p, c_int, c_void_p]
 seq_executor_execute = libsq.seq_executor_execute
 
 # Get pointer to the results stream
