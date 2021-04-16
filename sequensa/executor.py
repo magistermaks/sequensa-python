@@ -1,3 +1,4 @@
+
 from .native import libsq as native
 from .stream import Stream
 
@@ -26,6 +27,9 @@ class Executor:
 
     def execute(self, program):
         program.execute(self)
+
+    def strict_math(self, flag):
+        native.seq_executor_strict_math(self.__pointer, flag)
 
     def results(self):
         return Stream(native.seq_executor_results_stream_ptr(self.__pointer))
